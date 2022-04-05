@@ -81,12 +81,12 @@ class BookFromGoogle(View):
     def check_field_exist_in_api_data(self, items_volumeInfo_data, final_field):
         final_fields = ['publishedDate', 'industryIdentifiers', 'authors',
                         'language', 'pagecount', 'canonicalVolumeLink']
-        checking_function_list = [self.check_date, self.check_ISBN_is_13, self.check_author_quantity,
+        list_of_checking_function = [self.check_date, self.check_ISBN_is_13, self.check_author_quantity,
                                   self.check_language, self.check_page_count, self.check_url]
         if final_field in items_volumeInfo_data:
             for el in range(len(final_fields)):
                 if final_field in final_fields[el]:
-                    return checking_function_list[el](items_volumeInfo_data, final_field)
+                    return list_of_checking_function[el](items_volumeInfo_data, final_field)
             return items_volumeInfo_data[final_field]
         elif final_field not in items_volumeInfo_data:
             return None

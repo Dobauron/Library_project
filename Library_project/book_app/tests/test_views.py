@@ -3,8 +3,6 @@ from django.urls import reverse, reverse_lazy
 from ..models import Book
 from rest_framework.test import APITestCase
 from rest_framework import status
-import json
-
 
 class TestViews(TestCase):
 
@@ -24,15 +22,7 @@ class TestViews(TestCase):
             book_language='pl'
 
         )
-        self.update_url = reverse('update', kwargs={'id': self.new_book.id,
-                                                    # 'title': self.new_book.title,
-                                                    # 'author': self.new_book.author,
-                                                    # 'pub_date': self.new_book.pub_date,
-                                                    # 'number_of_pages': self.new_book.number_of_pages,
-                                                    # 'ISBN_number': self.new_book.ISBN_number,
-                                                    # 'URL_to_book_cover': self.new_book.URL_to_book_cover,
-                                                    # 'book_language': self.new_book.book_language,
-                                                    })
+        self.update_url = reverse('update', kwargs={'id': self.new_book.id,})
 
     def test_csrf_client(self):
         self.client = Client(enforce_csrf_checks=True)

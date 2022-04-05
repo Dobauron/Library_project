@@ -51,10 +51,6 @@ class BookCreateView(CreateView):
     form_class = AddBookForm
     success_url = reverse_lazy('create_done')
 
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super().form_valid(form)
-
 
 class BookUpdateView(UpdateView):
     queryset = Book.objects.all()
@@ -65,7 +61,3 @@ class BookUpdateView(UpdateView):
     def get_object(self, queryset=None):
         id = self.kwargs.get("id")
         return get_object_or_404(Book, id=id)
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super().form_valid(form)

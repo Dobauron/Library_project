@@ -11,6 +11,7 @@
 
             <a href="{% url 'create' %}" class="cover"> <input type="button" value ='create new record'></a>
             <a href="{% url 'api:import_book' %}" class="cover"> <input type="button" value ='import book'></a>
+            <a href="{% url 'api:book_api_list' %}" class="cover"> <input type="button" value ='export book'></a>
             *You can search book by using search field and data field simulatenously
         <hr/>
         <table>
@@ -36,7 +37,9 @@
                     <td><a href="https://library-app-project.herokuapp.com/library/update/{{book.id}}" class="cover"><input type="button" value ='update record'></a></td>
                 </tr>
                 {% endfor %}
+
         </table>
+                {% include "pagination.html" with page=page_obj %}
         </form>
-    {% include "pagination.html" with page=page_obj %}
+
     {% endblock %}
