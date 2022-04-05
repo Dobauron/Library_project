@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath Library Library.wsgi --log-file -
+web: gunicorn --pythonpath Library_project Library_project.wsgi --log-file -
