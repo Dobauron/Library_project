@@ -1,0 +1,42 @@
+
+{% extends "book_app/basic.html" %}
+{% load static %}
+    {% block content %}
+        <form method="GET" >
+
+            <input type="search" class="search" name = 'searchfield' placeholder="Search by Title, Author or Language">
+        Date of publication from: <input type="date" name ='fromdate' value="1000-01-01"/>
+        to: <input type="date" name ='todate' value="2022-01-01"/>
+            <input type="submit" value="Search">
+
+            <a href="{% url 'create' %}" class="cover"> <input type="button" value ='create new record'></a>
+            <a href="{% url 'api:import_book' %}" class="cover"> <input type="button" value ='import book'></a>
+            *You can search book by using search field and data field simulatenously
+        <hr/>
+        <table>
+            <tr class="bg-success p-2 text-dark bg-opacity-25">
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date of publication</th>
+                <th>ISBN</th>
+                <th>Number of pages</th>
+                <th>URL to book cover</th>
+                <th>Book language</th>
+                <th>Updates</th>
+            </tr>
+                {% for book in books %}
+                <tr class="table-warning">
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td style="text-align: center;">{{ book.pub_date }}</td>
+                    <td>{{ book.ISBN_number }}</td>
+                    <td style="text-align: center;">{{ book.number_of_pages }}</td>
+                    <td><a href="{{ book.URL_to_book_cover }}" class="cover" target="_blank">Click me!</a></td>
+                    <td>{{ book.book_language }}</td>
+                    <td><a href="https://librarytask.herokuapp.com/library/update/{{book.id}}" class="cover"><input type="button" value ='update record'></a></td>
+                </tr>
+                {% endfor %}
+        </table>
+        </form>
+
+    {% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'book_app/basic.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="search" class="search" placeholder="Import by title" name="title_field">
+        <input type="search" class="search" placeholder="Import by author" name="author_field">
+        </br>
+        </br>
+        <input type="submit" value="import">
+    </form>
+
+*You can import book by using both search field simulatenously
+{% endblock %}
