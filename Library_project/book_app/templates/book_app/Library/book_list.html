@@ -6,7 +6,7 @@
 
             <input type="search" class="search" name = 'searchfield' placeholder="Search by Title, Author or Language">
         Date of publication from: <input type="date" name ='fromdate' value="1000-01-01"/>
-        to: <input type="date" name ='todate' value="2022-01-01"/>
+        to: <input type="date" name ='todate' value="2023-01-01"/>
             <input type="submit" value="Search">
 
             <a href="{% url 'create' %}" class="cover"> <input type="button" value ='create new record'></a>
@@ -33,10 +33,10 @@
                     <td style="text-align: center;">{{ book.number_of_pages }}</td>
                     <td><a href="{{ book.URL_to_book_cover }}" class="cover" target="_blank">Click me!</a></td>
                     <td>{{ book.book_language }}</td>
-                    <td><a href="https://librarytask.herokuapp.com/library/update/{{book.id}}" class="cover"><input type="button" value ='update record'></a></td>
+                    <td><a href="https://library-app-project.herokuapp.com/library/update/{{book.id}}" class="cover"><input type="button" value ='update record'></a></td>
                 </tr>
                 {% endfor %}
         </table>
         </form>
-
+    {% include "pagination.html" with page=page_obj %}
     {% endblock %}
