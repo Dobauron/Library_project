@@ -13,7 +13,6 @@ class TestSerializers(APITestCase):
             ISBN_number='23564523454',
             URL_to_book_cover='www.gooogle.com',
             book_language='pl'
-
         )
 
         self.serializer = BookSerializer(instance=self.new_book)
