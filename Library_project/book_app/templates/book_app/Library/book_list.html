@@ -16,6 +16,7 @@
         <hr/>
         <table>
             <tr class="bg-success p-2 text-dark bg-opacity-25">
+                <th>Id</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Date of publication</th>
@@ -26,15 +27,16 @@
                 <th>Updates</th>
             </tr>
                 {% for book in books %}
-                <tr class="table-warning">
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.author }}</td>
+                <tr class="table table-bordered">
+                    <td>{{ book.id }}</td>
+                    <td style="text-align: center;" width="250px;">{{ book.title }}</td>
+                    <td style="text-align: center;" width="250px;">{{ book.author }}</td>
                     <td style="text-align: center;">{{ book.pub_date }}</td>
-                    <td>{{ book.ISBN_number }}</td>
+                    <td style="text-align: center;">{{ book.ISBN_number }}</td>
                     <td style="text-align: center;">{{ book.number_of_pages }}</td>
                     <td><a href="{{ book.URL_to_book_cover }}" class="cover" target="_blank">Click me!</a></td>
                     <td>{{ book.book_language }}</td>
-                    <td><a href="https://library-app-project.herokuapp.com/library/update/{{book.id}}" class="cover"><input type="button" value ='update record'></a></td>
+                    <td><a href="{{ book.get_absolute_url }}" class="cover"><input type="button" value ='update record'></a></td>
                 </tr>
                 {% endfor %}
 

@@ -56,7 +56,7 @@ class BookUpdateView(UpdateView):
     queryset = Book.objects.all()
     template_name = 'book_app/Library/add_edit_book.html'
     form_class = AddBookForm
-    success_url = 'done'
+    success_url = reverse_lazy('update_done')
 
     def get_object(self, queryset=None):
         id = self.kwargs.get("id")

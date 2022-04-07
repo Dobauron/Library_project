@@ -4,6 +4,7 @@ from ..models import Book
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+
 class TestViews(TestCase):
 
     def setUp(self):
@@ -11,9 +12,9 @@ class TestViews(TestCase):
         self.library_url = reverse('library')
         self.create_url = reverse('create')
         self.create_done_url = reverse('create_done')
-        self.update_done_url = reverse_lazy('update_done', args=[0])
+        self.update_done_url = reverse('update_done', args=[0])
         self.new_book = Book.objects.create(
-            title='hobbit',
+            title='hobbit homecoming',
             author='tolkien',
             pub_date='2022-08-09',
             number_of_pages='456',
@@ -22,7 +23,7 @@ class TestViews(TestCase):
             book_language='pl'
 
         )
-        self.update_url = reverse('update', kwargs={'id': self.new_book.id,})
+        self.update_url = reverse('update', kwargs={'id': self.new_book.id, })
 
     def test_csrf_client(self):
         self.client = Client(enforce_csrf_checks=True)
@@ -56,31 +57,38 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'book_app/Library/add_edit_book_done.html')
 
-    def test_Library_create_POST_new_book_record(self):
+    def test_Library_create_POST_book_record(self):
         response = self.client.post(self.create_url, {
             'title': 'Star Wars',
             'author': 'Lucas Arts',
-            'pub_date': '2022-08-09',
-            'number_of_pages': '456',
-            'ISBN_number': '23564523454',
-            'URL_to_book_cover': 'www.gooogle.com',
+            'pub_date': '08-7-2000',
+            'number_of_pages': 456,
+            'ISBN_number': '5235642341223',
+            'URL_to_book_cover': 'https://www.google.com/search?channel=fs&client=ubuntu&q=hobbit',
             'book_language': 'pl'
         })
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed(response, 'book_app/Library/add_edit_book.html')
+        self.assertRedirects(response, 'create_done')
 
-    def test_Library_update_POST_new_book_record(self):
-        response = self.client.post(self.update_url, {
-            'title': 'hobbit',
-            'author': 'tolkien',
-            'pub_date': '2022-08-09',
-            'number_of_pages': '456',
-            'ISBN_number': '23564523454',
-            'URL_to_book_cover': 'www.gooogle.com',
-            'book_language': 'pl'
-        })
+    def test_Library_update_POST_book_record(self):
 
-        self.assertEqual(response.status_code, 200)
+        response = self.client.post(reverse('update', kwargs={'id': self.new_book.id}),
+                                    {
+                                        'title': 'hobbit far away from home',
+                                        'author': 'tolkien',
+                                        'pub_date': '2022-08-09',
+                                        'number_of_pages': 456,
+                                        'ISBN_number': '23564523453',
+                                        'URL_to_book_cover': 'www.gooogle.com',
+                                        'book_language': 'pl'
+                                    },)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.new_book.title, 'hobbit far away from home')
+        self.assertRedirects(response, 'update_done')
+        self.assertTemplateUsed(response, 'book_app/Library/add_edit_book.html')
 
 
 class TestApiViews(APITestCase):
