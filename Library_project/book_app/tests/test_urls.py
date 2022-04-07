@@ -10,7 +10,7 @@ class TestUrls(SimpleTestCase):
         url = reverse('library')
         self.assertEqual(resolve(url).func.view_class, BookListView)
 
-    def test_Creat_url_resolves(self):
+    def test_Create_url_resolves(self):
         url = reverse('create')
         self.assertEqual(resolve(url).func.view_class, BookCreateView)
 

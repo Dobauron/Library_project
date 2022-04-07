@@ -4,16 +4,16 @@ import requests
 def get_api_books_from_google(i, title='', author=''):
     query = ''
     if title != '' and author != '':
-        query = 'intitle:'+title+'+'+'inauthor:'+author
+        query = 'intitle:' + title + '+' + 'inauthor:' + author
     elif title == '':
-        query = 'inauthor:'+author
+        query = 'inauthor:' + author
     elif author == '':
-        query = 'intitle:'+title
+        query = 'intitle:' + title
     params = {"q": query}
     url = 'https://www.googleapis.com/books/v1/volumes'
     response = requests.get(url, params=params)
     response_dict = response.json()
-    return response_dict['items'][i]['volumeInfo'],  response_dict['items']
+    return response_dict['items'][i]['volumeInfo'], response_dict['items']
 
 
 def check_field_exist_in_api_data(items_volumeInfo_data, final_field):

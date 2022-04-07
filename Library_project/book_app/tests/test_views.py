@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from ..models import Book
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -73,7 +73,6 @@ class TestViews(TestCase):
         self.assertRedirects(response, 'create_done')
 
     def test_Library_update_POST_book_record(self):
-
         response = self.client.post(reverse('update', kwargs={'id': self.new_book.id}),
                                     {
                                         'title': 'hobbit far away from home',
@@ -83,7 +82,7 @@ class TestViews(TestCase):
                                         'ISBN_number': '23564523453',
                                         'URL_to_book_cover': 'www.gooogle.com',
                                         'book_language': 'pl'
-                                    },)
+                                    }, )
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.new_book.title, 'hobbit far away from home')

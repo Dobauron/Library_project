@@ -16,7 +16,6 @@ class BookModelTest(TestCase):
         self.book = Book.objects.get(id=1)
 
     def test_get_absolute_url(self):
-
         self.assertEqual(self.book.get_absolute_url(), '/library/update/1')
 
     def test_book_title_name_label(self):

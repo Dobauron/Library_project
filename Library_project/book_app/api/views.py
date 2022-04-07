@@ -7,7 +7,6 @@ from django.shortcuts import render
 import requests
 
 
-
 class BookListApiView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -82,7 +81,7 @@ class BookFromGoogle(View):
         final_fields = ['publishedDate', 'industryIdentifiers', 'authors',
                         'language', 'pagecount', 'canonicalVolumeLink']
         list_of_checking_function = [self.check_date, self.check_ISBN_is_13, self.check_author_quantity,
-                                  self.check_language, self.check_page_count, self.check_url]
+                                     self.check_language, self.check_page_count, self.check_url]
         if final_field in items_volumeInfo_data:
             for el in range(len(final_fields)):
                 if final_field in final_fields[el]:

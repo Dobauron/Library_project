@@ -23,7 +23,7 @@ SECRET_KEY = 'django-insecure-#b^5d81zj+^a3xso51i)z3t%+^ixh_t=g*)-k406^b)s&u0f#y
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['library-app-project.herokuapp.com', '127.0.0.1']
 
